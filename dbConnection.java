@@ -8,8 +8,8 @@ public class dbConnection {
 	
 	static final String dbURL = "jdbc:mysql://localhost:3306/classicmodels";
 	
-	static final String user = "student";
-	static final String pass = "student";
+	static final String user = "root";
+	static final String pass = "password";
 	
 	public static void main(String[] args) {
 	try {
