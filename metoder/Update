@@ -64,12 +64,13 @@
 			statement = conn.prepareStatement("UPDATE orders SET orderDate = ?, requiredDate = ?, shippedDate = ?, status = ?, comments = ? , customerNumber = ? WHERE orderNumber = ?");
 
 			statement.setInt(1, order.orderNumber());
-			statement.setString(2, order.getorderDate());
-			statement.setString(3, order.getrequiredDate());
-			statement.setString(4, order.getshippedDate());
+			statement.setDate(2, order.getorderDate());
+			statement.setDate(3, order.getrequiredDate());
+			statement.setDate(4, order.getshippedDate());
 			statement.setString(5, order.getstatus());
-			statement.setInt(6, order.getcomments());
-			statement.setInt(7,employee.getcustomerNumber());
+			statement.setString(6, order.getcomments());
+			statement.setInt(7,order.getcustomerNumber());
+
 
 			statement.executeQuery();
 			database.give(conn);
