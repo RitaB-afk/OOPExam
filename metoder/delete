@@ -12,5 +12,18 @@
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+	
+	@Override
+	public void deleteEmployee(EmployeeDAO employeeNumber) {
+		 Connection conn = database.take();
+	        ResultSet result;
+	        PreparedStatement statement;
+	        try {
+	            statement = conn.prepareStatement("DELETE * FROM employee WHERE employeeNumber = ?");
+	            statement.executeUpdate();
 
-    }
+	        } catch (SQLException throwables) {
+	            throwables.printStackTrace();
+	        }
+
+	    }
