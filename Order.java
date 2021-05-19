@@ -76,12 +76,12 @@ package com.exam.OOPGroup14;
 	    public void setCustomerNumber(int customerNumber) {
 	    	this.customerNumber= customerNumber;
 	    }
+	    
 	    @Override
 	    public String toString() {
-	        return String
-	                .format("Order [orderNumber=%s, orderDate=%s, requiredDate=%s, shippedDate=%s, status=%s,comments=%s,customerNumber=%s)]",
-	                        orderNumber, orderDate, requiredDate, shippedDate, status, comments, customerNumber);
-	    }
+			return String.format("Order[ OrderNumber: " + this.getOrderNumber() + ", OrderDate: " + this.getOrderDate() + ", Required Date: " + this.getRequiredDate() + ", Shipped Date: " + this.getShippedDate() + ", Status: " + this.getStatus() + ", Comments: " + this.getComments()  +   ", CustomerNumber: " + this.getCustomerNumber());
+			
+		}
 
 
 	}
