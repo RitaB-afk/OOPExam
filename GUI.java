@@ -11,7 +11,7 @@ public class GUI extends JFrame implements ActionListener{
 	private JButton b1, b2, b3, b4, b5;
 	private JMenuBar menuBar;
 	private JMenu menu, menu2, menu3;
-	private JMenuItem menuItem1, menuItem2, menuItem3;
+	private JMenuItem menuItem1, menuItem2, menuItem3, menuItem4;
 	private JMenu subMenu;
 	private JCheckBoxMenuItem checkItem1, checkItem2;
 	
@@ -27,6 +27,7 @@ public class GUI extends JFrame implements ActionListener{
 		b3 = new JButton("Retrieve all employees");
 		b4 = new JButton("Bulk import from file");
 		b5 = new JButton("Exit");
+		b5.addActionListener(e -> System.exit(0));
 		
 		// Button placement
 		b1.setBounds(50, 100, 200, 70);
@@ -81,6 +82,10 @@ public class GUI extends JFrame implements ActionListener{
 		menuItem3.addActionListener(this);
 		menu.add(menuItem3);
 		
+		menuItem4 = new JMenuItem("Adding");
+		menuItem4.addActionListener(this);
+		menu2.add(menuItem4);
+		
 		// Submenu within menus' menus
 		subMenu = new JMenu("Submenu");
 		menu.add(subMenu);
@@ -119,4 +124,3 @@ public class GUI extends JFrame implements ActionListener{
 		
 		
 		
-
