@@ -24,3 +24,36 @@
 		database.give(conn);
 
 	}
+	
+	@Override
+	public void updateCustomer(Customer customer) {
+		Connection conn = database.take();
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement("UPDATE customers SET customerName = ?, contactLastName = ?, contactFirstName = ?, phone = ?, adressLine1 = ? , adressLine2 = ? , city = ? , state = ? , postalCode = ? , country = ? , salesRepEmployeeNumber = ? , creditLimit = ? WHERE customerNumber = ?");
+
+			statement.setString(1, customer.getcustomerName());
+			statement.setString(2, customer.getcontactLastName());
+			statement.setString(3, customer.getcontactFirstName());
+			statement.setString(4, customer.getphone());
+			statement.setString(5, customer.getadressLine1());
+			statement.setString(6, customer.getadressLine2());
+			statement.setString(7, customer.getcity());
+			statement.setString(8, customer.getstate());
+			statement.setString(9, customer.getpostalCode());
+			statement.setString(10, customer.getcountry());
+			statement.setInt(11, customer.getsalesRepEmployeeNumber());
+			statement.setDouble(12, customer.getcreditLimit());
+
+			statement.executeQuery();
+			database.give(conn);
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		database.give(conn);
+
+	}
+	
+	
