@@ -1,3 +1,4 @@
+	//update employee må lage for customer og order senere 
 	@Override
 	public void updateEmployee(Employee employee) {
 		Connection conn = database.take();
