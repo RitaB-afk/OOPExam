@@ -1,0 +1,16 @@
+	@Override
+	public void deleteCustomer(int customerNumber) {
+        Connection conn = database.take();
+        ResultSet result;
+        PreparedStatement statement;
+        try {
+            statement = conn.prepareStatement("DELETE * FROM customers WHERE customerNumber = ?");
+
+            statement.setInt(1, customerNumber);
+            statement.executeUpdate();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+    }
