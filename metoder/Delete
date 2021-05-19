@@ -4,7 +4,7 @@
         ResultSet result;
         PreparedStatement statement;
         try {
-            statement = conn.prepareStatement("DELETE * FROM customers WHERE customerNumber = ?");
+            statement = conn.prepareStatement("DELETE FROM customers WHERE customerNumber = ?");
 
             statement.setInt(1, customerNumber);
             statement.executeUpdate();
@@ -19,7 +19,7 @@
 	        ResultSet result;
 	        PreparedStatement statement;
 	        try {
-	            statement = conn.prepareStatement("DELETE * FROM employee WHERE employeeNumber = ?");
+	            statement = conn.prepareStatement("DELETE FROM employee WHERE employeeNumber = ?");
 	            statement.executeUpdate();
 
 	        } catch (SQLException throwables) {
@@ -34,7 +34,7 @@
 	        ResultSet result;
 	        PreparedStatement statement;
 	        try {
-	            statement = conn.prepareStatement("DELETE * FROM Orders WHERE orderDate = ?");
+	            statement = conn.prepareStatement("DELETE FROM Orders WHERE orderDate = ?");
 	            statement.executeUpdate();
 
 	        } catch (SQLException throwables) {
