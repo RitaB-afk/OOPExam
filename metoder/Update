@@ -1,0 +1,26 @@
+@Override
+	public void updateEmployee(Employee employee) {
+		Connection conn = database.take();
+		PreparedStatement statement;
+		try {
+			statement = conn.prepareStatement("UPDATE employees SET lastName = ?, firstName = ?, extension = ?, email = ?, officeCode = ? , reportsTo = ? WHERE employeeNumber = ?");
+
+			statement.setString(1, employee.getLastName());
+			statement.setString(2, employee.getFirstName());
+			statement.setString(3, employee.getExtension());
+			statement.setString(4, employee.getEmail());
+			statement.setString(5, employee.getOfficeCode());
+			statement.setInt(6, employee.getReportsTo());
+
+			statement.setInt(7,employee.getEmployeeNumber());
+
+			statement.executeQuery();
+			database.give(conn);
+
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+
+		database.give(conn);
+
+	}
