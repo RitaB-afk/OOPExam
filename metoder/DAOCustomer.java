@@ -138,12 +138,24 @@ public class DAOCustomer{
 
 	    PreparedStatement statement;
 	    try {
-	        statement = myConn.prepareStatement("DELETE FROM customers WHERE customerNumber = ?");
+	    	statement = myConn.prepareStatement("DELETE FROM orderDetails WHERE orderNumber IN (SELECT orderNumber from orders WHERE customerNumber = ?)");
+            statement.setInt(1,customerNumber);
+            System.out.println(statement);
+            statement.executeUpdate();
 
-	        statement.setInt(1, customerNumber);
-	        statement.executeUpdate();
+            statement = myConn.prepareStatement("DELETE FROM orders WHERE customerNumber = ?");
+            statement.setInt(1,customerNumber);
+            statement.executeUpdate();
 
-	    } catch (SQLException throwables) {
+            statement = myConn.prepareStatement("DELETE FROM payments WHERE customerNumber = ?");
+            statement.setInt(1,customerNumber);
+            statement.executeUpdate();
+
+            statement = myConn.prepareStatement("DELETE FROM customers WHERE customerNumber = ?");
+            statement.setInt(1,customerNumber);
+            statement.executeUpdate();
+
+        } catch (SQLException throwables)  {
 	        throwables.printStackTrace();
 	    }
 	
