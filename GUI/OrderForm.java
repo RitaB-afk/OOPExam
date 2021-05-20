@@ -33,40 +33,12 @@ public class OrderForm extends JFrame implements ActionListener {
 
     private OrderApp OrderApp;
 
-    private Order originalOrder= null;
-    private boolean updateMode= false;
     
-    public OrderForm(Menu theMenu, OrderDAO theOrderDAO, Order theoriginalOrder, boolean theUpdateMode) {
+    
+    public OrderForm(OrderApp OrderApp, OrderDAO theOrderDAO) {
         this();
-        OrderDAO=theOrderDAO;
-        
-        Menu= theMenu;
-        originalOrder= theoriginalOrder;
-        updateMode= theUpdateMode;
-        //if update is true we will set the title of this dialog to be "Update Employee" and
-        // we will populate the GUI with the previous employee information
-        if (updateMode) {
-            setTitle("Update Order");
-            populateGUI(originalOrder);
-        }
-
-    }
-    public OrderForm(OrderApp theOrderApp, OrderDAO theOrderDAO, Order theoriginalOrder, boolean theUpdateMode) {
-        this();
-        OrderDAO=theOrderDAO;
+	    OrderDAO=theOrderDAO;
         OrderApp= theOrderApp;
-        originalOrder= theoriginalOrder;
-        updateMode= theUpdateMode;
-        //if update is true we will set the title of this dialog to be "Update Employee" and
-        // we will populate the GUI with the previous employee information
-        if (updateMode) {
-            setTitle("Update Order");
-            populateGUI(originalOrder);
-        }
-
-    }
-    public OrderForm(Menu theMenu, OrderDAO theOrderDAO) {
-        this(theMenu, theOrderDAO, null, false);
         
     }
     private void populateGUI(Order theOrder) {
