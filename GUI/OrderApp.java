@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 public class OrderApp extends JFrame {
@@ -25,6 +24,12 @@ public class OrderApp extends JFrame {
 	private JTable table1;
 
 	private OrderDAO orDAO;
+
+	private JButton UpdateButton;
+
+	private JButton DeleteButton;
+
+	private JButton StoreButton;
 	
 	
 	public static void main(String[] args) {
@@ -103,6 +108,29 @@ public class OrderApp extends JFrame {
 			}
 		});
 		panel_1.add(Add);
+		UpdateButton = new JButton("Update Order");
+        UpdateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+        panel_1.add(UpdateButton);
+        DeleteButton= new JButton("Delete Order");
+        DeleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+        
+        panel_1.add(DeleteButton);
+        StoreButton= new JButton("Store to File");
+        StoreButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+        panel_1.add(StoreButton);
+
 	}
 
 	
