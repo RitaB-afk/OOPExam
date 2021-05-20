@@ -2,13 +2,19 @@ package com.exam.OOPGroup14;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerApp extends JFrame {
+public class CustomerApp extends JFrame implements DocumentManager {
 
 		private JPanel panel1;
 		private JTextField inputField;
@@ -88,7 +94,8 @@ public class CustomerApp extends JFrame {
 	         Add = new JButton("Add Customer");
 			Add.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+					CustomerForm add = new CustomerForm(CustomerApp.this,cusDAO);
+					add.setVisible(true);
 				}
 			});
 			panel_1.add(Add);
@@ -109,11 +116,53 @@ public class CustomerApp extends JFrame {
 	        
 	        panel_1.add(DeleteButton);
 	        StoreButton= new JButton("Store to File");
-	        StoreButton.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
+	        
+			StoreButton.addActionListener(ep -> {JFileChooser fc = new JFileChooser();
+				
+	            fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+	            fc.setDialogTitle("Specify a file to save");
+
+	            //set default folder
+	            fc.setCurrentDirectory(new File("C:\\Users\\Rita.DESKTOP-NDQVPRR\\OneDrive\\Bureau\\Objectoriented programming 2"));
+
+	            // adding filter to only accept .txt
+	            FileNameExtensionFilter filter = new FileNameExtensionFilter(".txt", "txt", "text");
+	            fc.setFileFilter(filter);
+
+	            int returnVal = fc.showSaveDialog(null);
+
+	            if (returnVal == JFileChooser.APPROVE_OPTION) {
+	                File fileToSave = fc.getSelectedFile();
+
+	                try {
+	                    CustomerDAO dao = new CustomerDAO();
+	                    JTextField LastNametextField= new JTextField();
+
+	                    String customerName = LastNametextField.getText();
+
+
+	                    if (customerName != null && customerName.trim().length() > 0) {
+
+	                        writeToFile(String.valueOf(dao.searchCustomers(customerName)), fileToSave);
+	                    }
+	                    else {
+
+	                        writeToFile(String.valueOf(dao.displayAllCustomers()),fileToSave);
+
+	                    }
+
+	                    JOptionPane.showMessageDialog(this, "Successful Update ", "Update",
+	                            JOptionPane.INFORMATION_MESSAGE);
+	                } catch (Exception e1) {
+	                    e1.printStackTrace();
+	                    JOptionPane.showMessageDialog(this, "Unsuccessful update", "Update",
+	                            JOptionPane.INFORMATION_MESSAGE);
+	                }
+
+	            }
+		});
 					
-				}
-			});
+			
 	        panel_1.add(StoreButton);
 	        ImportButton= new JButton("Import from file");
 	        ImportButton.addActionListener(new ActionListener() {
@@ -126,8 +175,24 @@ public class CustomerApp extends JFrame {
 
 		}
 
+		@Override
+		public void writeToFile(String text, File file) throws IOException {
+			 BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+		        writer.write(text);
+		        writer.close();
+			
+		}
+
+		@Override
+		public String readFromFile(File file) throws IOException {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
 		
 		}
+
+	
 
 
 
