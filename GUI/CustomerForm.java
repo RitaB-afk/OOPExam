@@ -40,40 +40,15 @@ public class CustomerForm extends JFrame implements ActionListener {
 	    private CustomerDAO CustomerDAO;
 
 	private CustomerApp CustomerApp;
-	private Customer originalCustomer= null;
-	public static boolean updateMode= false;
+	
 
-	    public CustomerForm(Menu theMenu, CustomerDAO theCustomerDAO, Customer theoriginalCustomer, boolean theUpdateMode) {
-	        this();
-	        CustomerDAO = theCustomerDAO;
-	        Menu= theMenu;
-	        originalCustomer= theoriginalCustomer;
-	        updateMode= theUpdateMode;
-
-	        if (updateMode) {
-	            setTitle("Update Customer");
-	            populateGui(originalCustomer);
-
-	        }
-	    }
-	    public CustomerForm(CustomerApp theCSA, CustomerDAO theCustomerDAO, Customer theoriginalCustomer, boolean theUpdateMode) {
-	        this();
+	    
+ public CustomerForm(CustomerApp theCSA,
+	                          CustomerDAO theCustomerDAO) {
+	    	this();
 	        CustomerDAO = theCustomerDAO;
 	        CustomerApp= theCSA;
-	        originalCustomer= theoriginalCustomer;
-	        updateMode= theUpdateMode;
-
-	        if (updateMode) {
-	            setTitle("Update Customer");
-	            populateGui(originalCustomer);
-	        }
 	    }
-	    
-	    public CustomerForm(Menu theMenu,
-	                          CustomerDAO theCustomerDAO) {
-	        this(theMenu, theCustomerDAO, null, false);
-	    }
-	    
 	private void populateGui(Customer theCustomer){
 	    customerNumberTextField.setText(String.valueOf(theCustomer.getCustomerNumber()));
 	    customerNameTextField.setText(theCustomer.getCustomerName());
