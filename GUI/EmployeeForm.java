@@ -35,41 +35,13 @@ import com.jgoodies.forms.layout.FormLayout;
 
 		    private EmployeeApp EmployeeApp;
 
-		    private Employee originalEmployee= null;
-		    private boolean updateMode= false;
+		
 		    
-		    public EmployeeForm(Menu theMenu, EmployeeDAO theEmployeeDAO, Employee theoriginalEmployee, boolean theUpdateMode) {
+		   public EmployeeForm(EmployeeApp theEAPP, EmployeeDAO theEDAO) {
 		        this();
-		        EmployeeDAO=theEmployeeDAO;
-		        
-		        Menu= theMenu;
-		        originalEmployee= theoriginalEmployee;
-		        updateMode= theUpdateMode;
-		        //if update is true we will set the title of this dialog to be "Update Employee" and
-		        // we will populate the GUI with the previous employee information
-		        if (updateMode) {
-		            setTitle("Update Employee");
-		            populateGUI(originalEmployee);
-		        }
+		        EmployeeDAO=theEDAO;
+		        EmployeeApp= theEAPP; 
 
-		    }
-		    public EmployeeForm(EmployeeApp theEmployeeApp, EmployeeDAO theEmployeeDAO, Employee theoriginalEmployee, boolean theUpdateMode) {
-		        this();
-		        EmployeeDAO=theEmployeeDAO;
-		        EmployeeApp= theEmployeeApp;
-		        originalEmployee= theoriginalEmployee;
-		        updateMode= theUpdateMode;
-		        //if update is true we will set the title of this dialog to be "Update Employee" and
-		        // we will populate the GUI with the previous employee information
-		        if (updateMode) {
-		            setTitle("Update Employee");
-		            populateGUI(originalEmployee);
-		        }
-
-		    }
-		    public EmployeeForm(Menu theMenu, EmployeeDAO theEmployeeDAO) {
-		        this(theMenu, theEmployeeDAO, null, false);
-		        
 		    }
 		    private void populateGUI(Employee theEmployee) {
 		        firstNameTextField.setText(theEmployee.getFirstName());
