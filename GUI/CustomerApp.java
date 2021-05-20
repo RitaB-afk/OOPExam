@@ -19,6 +19,10 @@ public class CustomerApp extends JFrame {
 		private JTable table1;
 
 		private CustomerDAO cusDAO;
+		private JButton UpdateButton;
+		private JButton DeleteButton;
+		private JButton StoreButton;
+		private JButton ImportButton;
 		
 		
 		public static void main(String[] args) {
@@ -57,7 +61,7 @@ public class CustomerApp extends JFrame {
 			flowLayout.setAlignment(FlowLayout.CENTER);
 			panel1.add(panel, BorderLayout.NORTH);
 			
-			request = new JLabel("Enter customer's last name");
+			request = new JLabel("Enter customer's name");
 			panel.add(request);
 			
 			inputField = new JTextField();
@@ -88,12 +92,42 @@ public class CustomerApp extends JFrame {
 				}
 			});
 			panel_1.add(Add);
+			UpdateButton = new JButton("Update Customer");
+	        UpdateButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+	        panel_1.add(UpdateButton);
+	        DeleteButton= new JButton("Delete Customer");
+	        DeleteButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+	        
+	        
+	        panel_1.add(DeleteButton);
+	        StoreButton= new JButton("Store to File");
+	        StoreButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+	        panel_1.add(StoreButton);
+	        ImportButton= new JButton("Import from file");
+	        ImportButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+			});
+	        panel_1.add(ImportButton);
+
+
 		}
 
 		
 		}
-
-	
 
 
 
