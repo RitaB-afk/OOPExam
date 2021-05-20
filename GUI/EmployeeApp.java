@@ -1,5 +1,6 @@
 package com.exam.OOPGroup14;
 
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -20,6 +21,8 @@ public class EmployeeApp extends JFrame {
 
     private EmployeeDAO employeeDAO;
     private JPanel panel_1;
+
+	private JButton StoreButton;
     
 
     public static void main(String[] args) {
@@ -109,7 +112,15 @@ public class EmployeeApp extends JFrame {
 				
 			}
 		});
+        
         panel_1.add(DeleteButton);
+        StoreButton= new JButton("Store to File");
+        StoreButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+        panel_1.add(StoreButton);
 
 
     }
@@ -130,3 +141,4 @@ public class EmployeeApp extends JFrame {
 
     }
 }
+
