@@ -1,0 +1,220 @@
+package com.exam.OOPGroup14;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+
+public class EmployeeApp extends JFrame {
+    private final JPanel panel1;
+   
+    private JButton searchButton;
+    private JButton Addbutton;
+    private JButton UpdateButton;
+    private JButton DeleteButton;
+    private JTable table1;
+    private JScrollPane scrollPane;
+    private String jobTitle;
+
+    private EmployeeDAO employeeDAO;
+    private JPanel panel_1;
+
+	private JButton StoreButton;
+    
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    EmployeeApp frame = new EmployeeApp();
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    public EmployeeApp() {
+        // create the DAO
+        try {
+            employeeDAO = new EmployeeDAO();
+        } catch (Exception exc) {
+            JOptionPane.showMessageDialog(this, "Error: " + exc, "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        setTitle("Employee Window");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(250, 100, 650, 450);
+		panel1 = new JPanel();
+		panel1.setBorder(new EmptyBorder(20, 25, 20, 15));
+		panel1.setLayout(new BorderLayout(0, 0));
+		setContentPane(panel1);
+		
+
+		JPanel panel = new JPanel();
+		panel.setBorder(new EmptyBorder(5, 55, 50, 55));
+		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
+		flowLayout.setAlignment(FlowLayout.CENTER);
+		panel1.add(panel, BorderLayout.NORTH);
+
+        JLabel Query = new JLabel("Pick JobTitle");
+        panel.add(Query);
+
+        JCheckBox presidentBox=  new JCheckBox ("President", false);
+        JCheckBox VPSBox= new JCheckBox("VP Sales", false);
+        JCheckBox SMABox= new JCheckBox("SM (APAC)", false);
+        JCheckBox SMEBox= new JCheckBox("SM (EMEA)", false);
+        JCheckBox SMNBox= new JCheckBox("SM (NA)", false);
+        JCheckBox SRBox= new JCheckBox("Sales Rep", false);
+        panel.add(presidentBox);
+        panel.add(VPSBox);
+        panel.add(SMABox);
+        panel.add(SMEBox);
+        panel.add(SMNBox);
+        panel.add(SRBox);
+        searchButton = new JButton("Search");
+        searchButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+	        		if(presidentBox.isSelected()) { 
+	        			jobTitle="President";
+	        		}
+	        			
+	        		else if(VPSBox.isSelected()) {
+	        			jobTitle="VP Sales";	
+	        		}
+	        			
+	        		else if (SMABox.isSelected()) 
+	        		{
+	        			
+	        			jobTitle="Sales Manager (APAC)";
+	        			
+	        		}
+	        		else if (SMEBox.isSelected()) 
+	       		  	{
+	        			jobTitle="Sale Manager (EMEA)";
+	        				
+	        		}
+	        		
+	        		else if (SMNBox.isSelected()) 
+	           		{
+	        			jobTitle="Sales Manager (NA)";
+	        				
+	        		}
+	        		else
+	           		 {
+	        			jobTitle="Sales Rep";	
+	        				
+	        		}
+	        		try {
+	        		EmployeeDAO dao= new EmployeeDAO();
+	       
+	        		
+	        			ArrayList<Employee> employees = null;
+	        			if (jobTitle!=null) {
+	        				
+					employees=dao.searchEmployees(jobTitle);
+					}
+	        			else {
+	        				employees=dao.getAllEmployees();
+	        			}
+	        			// create the model and update the "table"
+	                    EmployeeTable model = new EmployeeTable(employees);
+
+	                   table1.setModel(model);
+
+
+	        			for (Employee temp : employees) {
+	        				System.out.println(temp);
+	        			}
+				} catch (Exception e1) {
+					
+					e1.printStackTrace();
+				}	
+	        	}
+	        });
+				
+        panel.add(searchButton);
+
+        scrollPane = new JScrollPane();
+        panel1.add(scrollPane, BorderLayout.CENTER);
+
+        table1 = new JTable();
+        scrollPane.setViewportView(table1);
+
+        panel_1 = new JPanel();
+        panel1.add(panel_1, BorderLayout.SOUTH);
+
+        Addbutton = new JButton("Add Employee");
+        Addbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				EmployeeForm add = new EmployeeForm(EmployeeApp.this,employeeDAO);
+				add.setVisible(true);
+				
+			}
+		});
+        panel_1.add(Addbutton);
+
+        UpdateButton = new JButton("Update Employee");
+        UpdateButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table1.getSelectedRow();
+				 Employee temp = (Employee) table1.getValueAt(row, EmployeeTable.Emp_COL);
+
+	             
+
+	                EmployeeForm form = new EmployeeForm(EmployeeApp.this, employeeDAO,temp, true);
+
+	                
+	                form.setVisible(true);
+				
+				
+			}
+		});
+        panel_1.add(UpdateButton);
+        DeleteButton= new JButton("Delete Employee");
+        DeleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int row = table1.getSelectedRow();
+				 Employee temp = (Employee) table1.getValueAt(row, EmployeeTable.Emp_COL);
+				 try {
+					employeeDAO.deleteEmployee(temp.getEmployeeNumber());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
+        
+        panel_1.add(DeleteButton);
+        StoreButton= new JButton("Store to File");
+        StoreButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+        panel_1.add(StoreButton);
+
+
+    }
+
+    public void refreshEmployeesView() {
+
+        try {
+            ArrayList<Employee> employees = employeeDAO.getAllEmployees();
+
+            // create the model and update the "table"
+            EmployeeTable model = new EmployeeTable(employees);
+
+            table1.setModel(model);
+        } catch (Exception exc) {
+            JOptionPane.showMessageDialog(this, "Error: " + exc, "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }
+}
