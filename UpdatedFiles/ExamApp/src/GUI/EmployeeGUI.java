@@ -103,6 +103,9 @@ public class EmployeeGUI extends JFrame {
         panel_1.add(Addbutton);
 
         UpdateButton = new JButton("Update Employee");
+	            UpdateButton.addActionListener(e -> {
+        		updateEmployee();
+        });
         UpdateButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
